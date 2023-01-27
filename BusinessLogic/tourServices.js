@@ -14,6 +14,15 @@ exports.getDetailsService = async (id) => {
     return result
 }
 
+exports.patchTourServices = async (tourId, bodyData) => {
+
+    // console.log("B Logic ... "+id, bodyData);
+    const result = await Tours.findByIdAndUpdate(tourId, bodyData, { new: true })
+    // console.log(result)
+    return result
+}
+
+
 exports.postTourService = async (data) => {
     const tours = new Tours(data)
     // console.log(tours)
@@ -21,3 +30,7 @@ exports.postTourService = async (data) => {
     return result
 }
 
+exports.deleteTourService = async(id)=>{
+    const result = await Tours.deleteOne({_id:id})
+    return result
+}

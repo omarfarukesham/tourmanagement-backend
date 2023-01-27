@@ -1,4 +1,4 @@
-const { getTourService, postTourService, getDetailsService } = require("../BusinessLogic/tourServices");
+const { getTourService, postTourService, getDetailsService, patchTourServices, deleteTourService } = require("../BusinessLogic/tourServices");
 
 const getTour = async (req, res) => {
     try {
@@ -34,6 +34,8 @@ const getTour = async (req, res) => {
     }
 
 }
+
+
 const getDetailsTour = async (req, res) => {
     try {
         const getId = req.params.id
@@ -45,7 +47,7 @@ const getDetailsTour = async (req, res) => {
         })
     } catch (error) {
         res.status(400).json({
-            status:'Failed',
+            status: 'Failed',
         })
     }
 }
@@ -68,11 +70,39 @@ const createTour = async (req, res) => {
 
 }
 
-const updateTour = (req, res) => {
-    res.send(`I am delete route.......${req.params.id}`)
+const updateTour = async (req, res) => {
+
+    try {
+        const id = req.params.id
+        const bodyData = req.body
+        // console.log(id, bodyData);
+        const result = await patchTourServices(id, bodyData)
+        res.status(200).json({
+            status: 'success',
+            data: result
+        });
+    } catch (error) {
+        res.status(404).json({
+            status: 'fail',
+        });
+    }
 }
-const deleteTour = (req, res) => {
-    res.send(`I am delete route.......${req.params.id}`)
+
+
+const deleteTour = async (req, res) => {
+    try {
+        const deletedId = req.params.id
+        const result = await deleteTourService(deletedId)
+        res.status(200).json({
+            status: 'success',
+            data: result,
+        })
+    } catch (error) {
+        res.status(400).json({
+            status: 'Delete Fail'
+        })
+    }
+    // res.send(`I am delete route.......${req.params.id}`)/
 }
 
 module.exports = { getTour, createTour, updateTour, deleteTour, getDetailsTour }
