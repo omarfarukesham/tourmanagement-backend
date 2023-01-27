@@ -1,4 +1,12 @@
-const { getTourService, postTourService, getDetailsService, patchTourServices, deleteTourService } = require("../BusinessLogic/tourServices");
+const { 
+    getTourService,
+    postTourService,
+    getDetailsService,
+    patchTourServices,
+    deleteTourService,
+    trendingService,
+    cheapestService
+} = require("../BusinessLogic/tourServices");
 
 const getTour = async (req, res) => {
     try {
@@ -105,4 +113,29 @@ const deleteTour = async (req, res) => {
     // res.send(`I am delete route.......${req.params.id}`)/
 }
 
-module.exports = { getTour, createTour, updateTour, deleteTour, getDetailsTour }
+const getTrendingTour = async (req, res) => {
+    try {
+        const result = await trendingService()
+        res.status(200).json({
+            status: 'Success',
+            data: result
+        })
+    } catch (error) {
+
+    }
+}
+const getCheapestTour = async(req, res)=>{
+    try {
+        const result = await cheapestService()
+        res.status(200).json({
+            status:'Success',
+            data: result
+        })
+    } catch (error) {
+        res.status(400).json({
+            status:'Fail...'
+        })
+    }
+}
+
+module.exports = { getTour, createTour, updateTour, deleteTour, getDetailsTour, getTrendingTour, getCheapestTour }

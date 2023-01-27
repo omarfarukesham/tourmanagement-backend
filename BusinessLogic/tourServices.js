@@ -37,3 +37,13 @@ exports.deleteTourService = async (id) => {
     const result = await Tours.deleteOne({ _id: id })
     return result
 }
+
+exports.trendingService = async () => {
+    const result = await Tours.find({}).sort({ viewCount: -1 }).limit(3);
+    return result
+}
+
+exports.cheapestService = async () => {
+    const result = await Tours.find({}).sort({ price: 1 }).limit(3)
+    return result
+}
