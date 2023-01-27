@@ -12,6 +12,10 @@ const tourSchema = new mongoose.Schema({
         type: Number,
         required: [true, 'A tour must have a duration']
     },
+    viewCount: {
+        type: Number,
+        required: true
+    },
     difficulty: {
         type: String,
         required: [true, 'A tour must have a difficulty'],
@@ -29,13 +33,13 @@ const tourSchema = new mongoose.Schema({
         type: Number,
         required: [true, 'A tour must have a price']
     },
-    
+
     summary: {
         type: String,
         trim: true,
         required: [true, 'A tour must have a summary']
     },
-  
+
 });
 
 const Tour = mongoose.model('products', tourSchema);

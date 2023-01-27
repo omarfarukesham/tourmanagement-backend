@@ -49,10 +49,12 @@ const getDetailsTour = async (req, res) => {
         })
     }
 }
+
 const createTour = async (req, res) => {
     try {
-
-        const result = await postTourService()
+        const dataRequest = req.body
+        // console.log(dataRequest)
+        const result = await postTourService(dataRequest)
         res.status(200).json({
             status: 'success',
             data: result,

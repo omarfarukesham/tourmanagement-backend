@@ -8,15 +8,15 @@ exports.getTourService = async (queries) => {
     return result
 }
 
-exports.getDetailsService = async(id)=>{
-    console.log(id)
-    const result = await Tours.find({_id:id})
+exports.getDetailsService = async (id) => {
+    // console.log(id)
+    const result = await Tours.findByIdAndUpdate({ _id: id }, { $inc: { viewCount: 1 } }, { new: true });
     return result
 }
 
 exports.postTourService = async (data) => {
     const tours = new Tours(data)
-    console.log(tours)
+    // console.log(tours)
     const result = await tours.save()
     return result
 }
